@@ -1,6 +1,7 @@
 export class Enemy {
 
     static WIDTH: number = 54;
+    static HEIGHT: number = 55;
 
     position: number;
     node: HTMLElement;
@@ -10,6 +11,7 @@ export class Enemy {
         this.node = document.createElement('div');
         this.node.classList.add('enemy');
         this.node.style.left = position + 'px';
+        this.node.style.top = '-' + Enemy.HEIGHT + 'px';
         this.dead = false;
         this.speed = speed;
     }
@@ -18,7 +20,7 @@ export class Enemy {
         if (this.dead) {
             return;
         }
-        let currentTop = parseInt(this.node.style.top) || 0;
+        let currentTop = parseInt(this.node.style.top);
         this.node.style.top = (currentTop + this.speed) + 'px';
     }
 
