@@ -22,7 +22,7 @@ class Game {
     }
 
     spawnEnemy() {
-        let left = Math.random() * this.board.getWidth();
+        let left = Math.random() * (this.board.getWidth() - Enemy.WIDTH);
         let enemy = new Enemy(left);
         this.enemys.push(enemy);
         this.board.addItem(enemy.node);

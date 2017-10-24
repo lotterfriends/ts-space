@@ -1,5 +1,7 @@
 export class Enemy {
 
+    static WIDTH: number = 54;
+
     position: number;
     node: HTMLElement;
     dead: boolean;
