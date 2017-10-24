@@ -43,7 +43,7 @@ class Game {
             }
         }
 
-        window.requestAnimationFrame(() => { 
+        window.requestAnimationFrame(() => {
             this.run();
         });
     }
