@@ -5,11 +5,10 @@
   "main": "bundle.js",
   "dependencies": {
     "ts-loader": "^3.0.5",
-    "typescript": "^2.5.3"
+    "typescript": "^2.5.3",
+    "webpack": "^3.8.1"
   },
-  "devDependencies": {},
   "scripts": {
-    "hello": "nvm use 8",
     "watch": "webpack --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,6 +18,10 @@
     "space",
     "game"
   ],
+  "engines": {
+    "node": ">=8"
+  },
+  "engineStrict": true,
   "author": "Andre Tarnowsky",
   "license": "MIT"
 }
