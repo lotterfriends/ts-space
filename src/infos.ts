@@ -1,6 +1,7 @@
 export class Infos {
     public static CLS: string = 'infos';
     public static LEVEL_CLS: string = 'level';
+
     private level: number = 0;
     private node: HTMLElement = document.createElement('div');
     private levelNode: HTMLElement = document.createElement('span');
