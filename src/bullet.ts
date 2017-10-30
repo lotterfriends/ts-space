@@ -11,15 +11,21 @@ export class Bullet {
 
     constructor(position: Position) {
         this.position = position;
+        this.bootstrap();
+    }
+
+    private bootstrap(): void {
+        this.node.style.width = Bullet.WIDTH + 'px';
+        this.node.style.height = Bullet.HEIGHT + 'px';
         this.node.classList.add('bullet');
         this.node.style.transform = 'translate(' + this.position.left + 'px, ' + this.position.top + 'px)';
     }
 
-    public getNode():HTMLElement {
+    public getNode(): HTMLElement {
         return this.node;
     }
 
-    public move():void {
+    public move(): void {
         if (this.dead) {
             return;
         }
@@ -27,11 +33,11 @@ export class Bullet {
         this.node.style.transform = 'translate(' + this.position.left + 'px, ' + this.position.top + 'px)';
     }
 
-    public getPosition():Position {
+    public getPosition(): Position {
         return this.position;
     }
 
-    public destroy():void {
+    public destroy(): void {
         this.dead = true;
         this.node.remove();
     }
