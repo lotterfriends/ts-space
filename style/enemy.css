@@ -1,0 +1,6 @@
+.enemy {
+	position: absolute;
+	width: 54px;
+	height: 55px;
+	background: url(../img/alien_ship.gif) no-repeat 0 0 transparent;
+}

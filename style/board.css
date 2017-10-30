@@ -1,0 +1,59 @@
+.infos {
+	color: #fff;
+}
+
+.infos span {
+	margin-left: 5px;
+}
+
+.explosion {
+	position: absolute;
+}
+
+.explosion::selection {
+	background: transparent;
+}
+
+.explosion::-moz-selection {
+	background: transparent;
+}
+
+.gameOverText {
+	color: #fff;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	position: absolute;
+}
+
+.board {
+    border: 1px solid #888;
+	margin: 50px auto;
+	font-family: Sans-serif;
+	font-size: 16px;
+	background: #666;
+	padding: 0;
+	width: 600px;
+	overflow: hidden;
+	cursor: none;
+	border-radius: 15px;
+	opacity: 0.8;
+	background: url(../img/space.gif) repeat 50% 1px;
+	height: 440px;
+	position: relative;
+	animation-name: moveSpace;
+	animation-duration: 100s;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+}
+
+@keyframes moveSpace {
+	
+	from {
+		background-position: 50% 0px;
+	}
+	
+	to { 
+		background-position: 50% 1000000px;
+	}
+}
