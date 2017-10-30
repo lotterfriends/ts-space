@@ -1,0 +1,9 @@
+.player {
+    position: absolute;
+    width: 40px;
+    height: 36px;
+    background: blue;
+    border-radius: 50%;
+    bottom: 0;
+    background: url(../img/player.gif) no-repeat 0 0 transparent;
+}

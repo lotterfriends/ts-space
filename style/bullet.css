@@ -1,0 +1,6 @@
+.bullet {
+    width: 2px;
+	height: 2px;
+	background: white;
+	position: absolute;
+}
