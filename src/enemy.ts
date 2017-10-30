@@ -18,9 +18,11 @@ export class Enemy {
         this.left = left;
         this.node.style.transform = 'translate(' + this.left + 'px, ' + this.top + 'px)';
         this.speed = speed;
+        this.node.style.width = Enemy.WIDTH + 'px';
+        this.node.style.height = Enemy.HEIGHT + 'px';
     }
 
-    public move():void {
+    public move(): void {
         if (this.dead) {
             return;
         }
@@ -28,18 +30,18 @@ export class Enemy {
         this.node.style.transform = 'translate(' + this.left + 'px, ' + this.top + 'px)';
     }
 
-    public getTop():number {
+    public getTop(): number {
         return this.top;
     }
-    
-    public getPosition():Position {
+
+    public getPosition(): Position {
         return {
             left: this.left,
             top: this.top
         }
     }
 
-    public destroy(board?: Board):void {
+    public destroy(board?: Board): void {
         this.dead = true;
         if (board) {
             let ex = new Explosion(this.getPosition());

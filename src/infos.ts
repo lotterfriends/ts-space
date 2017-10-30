@@ -16,16 +16,16 @@ export class Infos {
         this.setLevel(this.level);
     }
 
-    getNode():HTMLElement {
+    public getNode(): HTMLElement {
         return this.node;
     }
 
-    setLevel(level: number):void {
+    public setLevel(level: number): void {
         this.level = level;
         this.levelNode.innerHTML = 'Level: ' + level.toString();
     }
 
-    setKillCount(killCount: number) {
+    public setKillCount(killCount: number) {
         this.killCount = killCount;
         this.killNode.innerHTML = 'Killed: ' + killCount.toString();
     }

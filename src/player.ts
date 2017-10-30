@@ -16,15 +16,8 @@ export class Player {
         this.node.classList.add('player');
         this.width = this.node.offsetWidth;
         this.node.style.transform = 'translateX(' + ((Board.WIDTH / 2) - (this.width / 2)) + 'px)';
-        // this.initMouseListener();
         this.initKeyboardListener();
     }
-
-    // private initMouseListener() {
-    //     document.addEventListener('mousemove', (event) => {
-    //         this.move(event.clientX);
-    //     });
-    // }
 
     private initKeyboardListener() {
         document.addEventListener('keydown', (event) => {
@@ -45,6 +38,7 @@ export class Player {
             }
         });
     }
+
     public fire():Bullet {
         let pos: Position = { 
             left: this.getLeft() + (this.node.offsetWidth / 2),
