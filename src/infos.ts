@@ -1,6 +1,7 @@
 export class Infos {
     public static CLS: string = 'infos';
     public static LEVEL_CLS: string = 'level';
+
     private level: number = 0;
     private node: HTMLElement = document.createElement('div');
     private levelNode: HTMLElement = document.createElement('span');
@@ -16,16 +17,16 @@ export class Infos {
         this.setLevel(this.level);
     }
 
-    getNode():HTMLElement {
+    public getNode(): HTMLElement {
         return this.node;
     }
 
-    setLevel(level: number):void {
+    public setLevel(level: number): void {
         this.level = level;
         this.levelNode.innerHTML = 'Level: ' + level.toString();
     }
 
-    setKillCount(killCount: number) {
+    public setKillCount(killCount: number) {
         this.killCount = killCount;
         this.killNode.innerHTML = 'Killed: ' + killCount.toString();
     }
