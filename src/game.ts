@@ -3,6 +3,7 @@ import { Player } from './player';
 import { Enemy } from './enemy';
 import { Infos } from './infos';
 import { Bullet } from './bullet';
+import { Keys } from './keys';
 
 class Game {
     speed: number;
@@ -38,12 +39,12 @@ class Game {
 
     initKeyboardListener():void {
         document.addEventListener('keydown', (event) => {
-            if (event.which === 32) { // space
+            if (event.which === Keys.SPACE) {
                 let bullet = this.player.fire();
                 this.board.addItem(bullet.getNode());
                 this.bullets.push(bullet);
             }
-            if (event.which === 80) { // p
+            if (event.which === Keys.P) {
                 this.pause = !this.pause;
             }
         });
