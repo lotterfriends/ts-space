@@ -1,35 +1,50 @@
+import { Position } from "./position";
+import { Board } from "./board";
+import { Explosion } from "./explosion";
+
 export class Enemy {
 
     static WIDTH: number = 54;
     static HEIGHT: number = 55;
 
-    position: number;
-    node: HTMLElement;
-    dead: boolean;
+    node: HTMLElement = document.createElement('div');
+    dead: boolean = false;
     speed: number = 1;
-    constructor(position: number, speed: number = 1) {
-        this.node = document.createElement('div');
+    top: number = Enemy.HEIGHT * -1;
+    left: number;
+
+    constructor(left: number, speed: number = 1) {
         this.node.classList.add('enemy');
-        this.node.style.left = position + 'px';
-        this.node.style.top = '-' + Enemy.HEIGHT + 'px';
-        this.dead = false;
+        this.left = left;
+        this.node.style.transform = 'translate(' + this.left + 'px, ' + this.top + 'px)';
         this.speed = speed;
     }
 
-    move() {
+    public move():void {
         if (this.dead) {
             return;
         }
-        let currentTop = parseInt(this.node.style.top);
-        this.node.style.top = (currentTop + this.speed) + 'px';
+        this.top = this.top + this.speed;
+        this.node.style.transform = 'translate(' + this.left + 'px, ' + this.top + 'px)';
     }
 
-    getOffsetTop() {
-        return parseInt(this.node.style.top) || 0;
+    public getTop():number {
+        return this.top;
+    }
+    
+    public getPosition():Position {
+        return {
+            left: this.left,
+            top: this.top
+        }
     }
 
-    destroy() {
+    public destroy(board?: Board):void {
         this.dead = true;
+        if (board) {
+            let ex = new Explosion(this.getPosition());
+            board.addItem(ex.getNode());
+        }
         this.node.remove();
     }
 }

@@ -1,5 +1,8 @@
 export class Board {
 
+    static WIDTH:number = 600;
+    static HEIGHT:number = 440;
+
     node: HTMLElement;
 
     constructor() {
@@ -7,19 +10,19 @@ export class Board {
         this.node.classList.add('board');
     }
 
-    addItem(item: HTMLElement) {
+    addItem(item: HTMLElement):void {
         this.node.appendChild(item);
     }
 
-    removeItem(item: HTMLElement) {
+    removeItem(item: HTMLElement):void {
         this.node.removeChild(item);
     }
 
-    getWidth() {
+    getWidth():number {
         return this.node.offsetWidth;
     }
 
-    getHeight() {
+    getHeight():number {
         return this.node.offsetHeight;
     }
 }
