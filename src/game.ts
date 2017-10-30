@@ -6,30 +6,29 @@ import { Bullet } from './bullet';
 import { Keys } from './keys';
 
 class Game {
-    speed: number;
     player: Player;
     board: Board;
     infos: Infos;
     enemys: Array<Enemy> = [];
     bullets: Array<Bullet> = [];
+
+    speed: number = 40;
     level: number = 1;
     destroyedCount: number = 0;
     startTime: Date;
-    levelDurationInSec: number;
+    levelDurationInSec: number = 10;
     livetime: number;
     gameOver: boolean = false;
     pause: boolean = false;
 
     constructor() {
-        this.speed = 40;
         this.board = new Board();
         this.player = new Player();
         this.infos = new Infos(this.level);
-        this.board.addItem(this.player.node);
-        this.levelDurationInSec = 10;
     }
 
     start() {
+        this.board.addItem(this.player.node);
         document.body.appendChild(this.infos.getNode());
         document.body.appendChild(this.board.node);
         this.startTime = new Date();
@@ -37,7 +36,7 @@ class Game {
         this.run();
     }
 
-    initKeyboardListener():void {
+    initKeyboardListener(): void {
         document.addEventListener('keydown', (event) => {
             if (event.which === Keys.SPACE) {
                 let bullet = this.player.fire();
@@ -51,7 +50,7 @@ class Game {
     }
 
     spawnEnemy() {
-        let left = Math.random() * (this.board.getWidth() - Enemy.WIDTH);
+        let left = Math.random() * (Board.WIDTH - Enemy.WIDTH);
         let enemy = new Enemy(left);
         this.enemys.push(enemy);
         this.board.addItem(enemy.node);
@@ -77,7 +76,7 @@ class Game {
                 this.level++;
                 this.infos.setLevel(this.level);
             }
-        
+
             if (Math.round(Math.random() * 400) <= this.level) {
                 this.spawnEnemy();
             }
@@ -85,26 +84,26 @@ class Game {
             // collision
             for (let enemy of this.enemys) {
                 for (let bullet of this.bullets) {
-                    var rect1 = {x: enemy.getPosition().left, y: enemy.getPosition().top, width: Enemy.WIDTH, height: Enemy.HEIGHT}
-                    var rect2 = {x: bullet.getPosition().left, y: bullet.getPosition().top, width: Bullet.WIDTH, height: Bullet.HEIGHT}
-                    
+                    var rect1 = { x: enemy.getPosition().left, y: enemy.getPosition().top, width: Enemy.WIDTH, height: Enemy.HEIGHT }
+                    var rect2 = { x: bullet.getPosition().left, y: bullet.getPosition().top, width: Bullet.WIDTH, height: Bullet.HEIGHT }
+
                     if (rect1.x < rect2.x + rect2.width &&
-                    rect1.x + rect1.width > rect2.x &&
-                    rect1.y < rect2.y + rect2.height &&
-                    rect1.height + rect1.y > rect2.y) {
+                        rect1.x + rect1.width > rect2.x &&
+                        rect1.y < rect2.y + rect2.height &&
+                        rect1.height + rect1.y > rect2.y) {
                         this.bullets.splice(this.bullets.indexOf(bullet), 1);
                         this.enemys.splice(this.enemys.indexOf(enemy), 1);
                         bullet.destroy();
                         enemy.destroy(this.board);
                         this.destroyedCount++;
-                        this.infos.setKillCount(this.destroyedCount); 
+                        this.infos.setKillCount(this.destroyedCount);
                     }
 
                 }
             }
 
             for (let enemy of this.enemys) {
-                if (enemy.getTop() + Enemy.HEIGHT > this.board.getHeight()) {
+                if (enemy.getTop() + Enemy.HEIGHT > Board.HEIGHT) {
                     enemy.destroy();
                     this.enemys.splice(this.enemys.indexOf(enemy), 1);
                     this.setGameOver();
