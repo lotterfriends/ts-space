@@ -1,6 +1,7 @@
 import { Board } from './board';
 import { Bullet } from './bullet';
 import { Position } from "./position";
+import { Keys } from './keys';
 
 export class Player {
     
@@ -27,19 +28,19 @@ export class Player {
 
     private initKeyboardListener() {
         document.addEventListener('keydown', (event) => {
-            if (event.which === 37) {
+            if (event.which === Keys.LEFT) {
                this.keyLeftArrowDown = true; 
             }
-            if (event.which === 39) {
+            if (event.which === Keys.RIGHT) {
                 this.keyRightArrowDown = true;
             }
         });
 
         document.addEventListener('keyup', (event) => {
-            if (event.which === 37) {
+            if (event.which === Keys.LEFT) {
                 this.keyLeftArrowDown = false; 
             }
-            if (event.which === 39) {
+            if (event.which === Keys.RIGHT) {
                 this.keyRightArrowDown = false;
             }
         });
