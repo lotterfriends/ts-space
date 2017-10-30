@@ -41,6 +41,9 @@
 	background: url(../img/space.gif) repeat 50% 1px;
 	height: 440px;
 	position: relative;
+}
+
+.board:not(.gameOver) {
 	animation-name: moveSpace;
 	animation-duration: 100s;
 	animation-timing-function: linear;
