@@ -1,9 +1,12 @@
 export class Node {
     protected node: HTMLElement;
 
-    constructor(type: string, cls: string) {
+    constructor(type: string, cls: string, content?: string) {
         this.node = document.createElement(type);
         this.node.classList.add(cls);
+        if (content) {
+            this.node.innerHTML = content;
+        }
     }
 
     public getNode(): HTMLElement {

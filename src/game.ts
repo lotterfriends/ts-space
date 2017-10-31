@@ -72,10 +72,7 @@ class Game extends Node {
         if (!this.gameOver) {
             this.gameOver = true;
             this.board.addCls('gameOver');
-            var goNode = document.createElement('div');
-            goNode.classList.add('gameOverText');
-            goNode.innerHTML = 'GAME OVER!';
-            this.board.addItem(goNode);
+            this.board.addItem(new Node('div', 'gameOverText', 'GAME OVER!').getNode());
         }
     }
 
