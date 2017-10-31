@@ -109,9 +109,8 @@ class Game extends Node {
                     }
 
                 }
-            }
 
-            for (let enemy of this.enemys) {
+                // move the enemys
                 if (enemy.getPosition().top + Enemy.HEIGHT > Board.HEIGHT) {
                     enemy.destroy();
                     this.enemys.splice(this.enemys.indexOf(enemy), 1);
@@ -121,6 +120,7 @@ class Game extends Node {
                 }
             }
 
+            // move the bullets 
             for (let bullet of this.bullets) {
                 if (bullet.getPosition().top <= 0) {
                     bullet.destroy();
