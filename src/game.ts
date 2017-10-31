@@ -13,7 +13,7 @@ class Game extends Node {
     private enemys: Array<Enemy> = [];
     private bullets: Array<Bullet> = [];
 
-    private speed: number = 40;
+    private spawnRate: number = 400;
     private level: number = 1;
     private destroyedCount: number = 0;
     private startTime: Date;
@@ -41,8 +41,8 @@ class Game extends Node {
         this.infos = new Infos(this.level);
 
         this.board.addItem(this.player.getNode());
-        this.node.appendChild(this.infos.getNode());
-        this.node.appendChild(this.board.getNode());
+        this.addItem(this.infos.getNode());
+        this.addItem(this.board.getNode());
         this.startTime = new Date();
 
         this.initKeyboardListener();
@@ -57,6 +57,11 @@ class Game extends Node {
             }
             if (event.which === Keys.P) {
                 this.pause = !this.pause;
+                if (this.pause) {
+                    this.board.addItem(new Node('div', 'pauseText', 'PAUSE').getNode());
+                } else {
+                    this.board.removeItem(document.querySelector('.pauseText') as HTMLElement);
+                }
             }
         });
     }
@@ -86,7 +91,7 @@ class Game extends Node {
                 this.infos.setLevel(this.level);
             }
 
-            if (Math.round(Math.random() * 400) <= this.level) {
+            if (Math.round(Math.random() * this.spawnRate) <= this.level) {
                 this.spawnEnemy();
             }
 
@@ -107,7 +112,6 @@ class Game extends Node {
                         this.destroyedCount++;
                         this.infos.setKillCount(this.destroyedCount);
                     }
-
                 }
 
                 // move the enemys
