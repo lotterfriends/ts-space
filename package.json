@@ -1,6 +1,6 @@
 {
   "name": "ts-space",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "typescript space shooter",
   "main": "bundle.js",
   "dependencies": {
@@ -24,5 +24,5 @@
   "engineStrict": true,
   "author": "Andre Tarnowsky",
   "license": "MIT",
-  "buildTimestamp": 1509449573814
+  "buildTimestamp": 1509450435624
 }
