@@ -2,21 +2,21 @@ import { Board } from './board';
 import { Bullet } from './bullet';
 import { Position } from "./position";
 import { Keys } from './keys';
+import { Node } from './node';
 
-export class Player {
+export class Player extends Node {
 
-    private node: HTMLElement = document.createElement('div');
     private speed: number = 5;
     private keyLeftArrowDown: boolean = false;
     private keyRightArrowDown: boolean = false;
 
     constructor() {
+        super('div', 'player');
         this.bootstrap();
         this.initKeyboardListener();
     }
 
     private bootstrap() {
-        this.node.classList.add('player');
         this.node.style.transform = 'translateX(' + ((Board.WIDTH / 2) - (this.node.offsetWidth / 2)) + 'px)';
     }
 
@@ -68,10 +68,6 @@ export class Player {
             top: Board.HEIGHT - this.node.offsetHeight
         };
         return new Bullet(pos);
-    }
-
-    public getNode(): HTMLElement {
-        return this.node;
     }
 
     public move(): void {

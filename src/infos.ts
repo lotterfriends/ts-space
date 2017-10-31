@@ -1,24 +1,20 @@
-export class Infos {
+import { Node } from './node';
+
+export class Infos extends Node {
     public static CLS: string = 'infos';
-    public static LEVEL_CLS: string = 'level';
 
     private level: number = 0;
-    private node: HTMLElement = document.createElement('div');
     private levelNode: HTMLElement = document.createElement('span');
     private killNode: HTMLElement = document.createElement('span');
     private killCount: number = 0;
 
     constructor(level: number) {
+        super('div', Infos.CLS);
         this.level = level;
-        this.node.classList.add(Infos.CLS);
-        this.levelNode.classList.add(Infos.LEVEL_CLS);
-        this.node.appendChild(this.levelNode);
-        this.node.appendChild(this.killNode);
+        this.addItem(this.levelNode);
+        this.addItem(this.killNode);
         this.setLevel(this.level);
-    }
-
-    public getNode(): HTMLElement {
-        return this.node;
+        this.setKillCount(this.killCount);
     }
 
     public setLevel(level: number): void {

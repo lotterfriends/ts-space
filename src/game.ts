@@ -4,16 +4,16 @@ import { Enemy } from './enemy';
 import { Infos } from './infos';
 import { Bullet } from './bullet';
 import { Keys } from './keys';
+import { Node } from "./node";
 
-class Game {
+class Game extends Node {
     private player: Player;
     private board: Board;
     private infos: Infos;
     private enemys: Array<Enemy> = [];
     private bullets: Array<Bullet> = [];
 
-    private node: HTMLElement = document.createElement('div');
-    private speed: number = 40;
+    private spawnRate: number = 400;
     private level: number = 1;
     private destroyedCount: number = 0;
     private startTime: Date;
@@ -23,6 +23,7 @@ class Game {
     private pause: boolean = false;
 
     constructor() {
+        super('div', 'game');
         this.bootstrap();
         this.start();
     }
@@ -34,15 +35,14 @@ class Game {
 
     private bootstrap(): void {
         document.body.appendChild(this.node);
-        this.node.classList.add('game');
 
         this.board = new Board();
         this.player = new Player();
         this.infos = new Infos(this.level);
 
         this.board.addItem(this.player.getNode());
-        this.node.appendChild(this.infos.getNode());
-        this.node.appendChild(this.board.getNode());
+        this.addItem(this.infos.getNode());
+        this.addItem(this.board.getNode());
         this.startTime = new Date();
 
         this.initKeyboardListener();
@@ -57,6 +57,11 @@ class Game {
             }
             if (event.which === Keys.P) {
                 this.pause = !this.pause;
+                if (this.pause) {
+                    this.board.addItem(new Node('div', 'pauseText', 'PAUSE').getNode());
+                } else {
+                    this.board.removeItem(document.querySelector('.pauseText') as HTMLElement);
+                }
             }
         });
     }
@@ -72,10 +77,7 @@ class Game {
         if (!this.gameOver) {
             this.gameOver = true;
             this.board.addCls('gameOver');
-            var goNode = document.createElement('div');
-            goNode.classList.add('gameOverText');
-            goNode.innerHTML = 'GAME OVER!';
-            this.board.addItem(goNode);
+            this.board.addItem(new Node('div', 'gameOverText', 'GAME OVER!').getNode());
         }
     }
 
@@ -89,7 +91,7 @@ class Game {
                 this.infos.setLevel(this.level);
             }
 
-            if (Math.round(Math.random() * 400) <= this.level) {
+            if (Math.round(Math.random() * this.spawnRate) <= this.level) {
                 this.spawnEnemy();
             }
 
@@ -110,11 +112,9 @@ class Game {
                         this.destroyedCount++;
                         this.infos.setKillCount(this.destroyedCount);
                     }
-
                 }
-            }
 
-            for (let enemy of this.enemys) {
+                // move the enemys
                 if (enemy.getPosition().top + Enemy.HEIGHT > Board.HEIGHT) {
                     enemy.destroy();
                     this.enemys.splice(this.enemys.indexOf(enemy), 1);
@@ -124,6 +124,7 @@ class Game {
                 }
             }
 
+            // move the bullets 
             for (let bullet of this.bullets) {
                 if (bullet.getPosition().top <= 0) {
                     bullet.destroy();
