@@ -1,15 +1,16 @@
 import { Position } from "./position";
+import { Node } from "./node";
 
-export class Bullet {
+export class Bullet extends Node {
     public static WIDTH: number = 2;
     public static HEIGHT: number = 2;
 
     private dead: boolean = false;
     private speed: number = 5;
-    private node: HTMLElement = document.createElement('div');
     private position: Position;
 
     constructor(position: Position) {
+        super('div', 'bullet');
         this.position = position;
         this.bootstrap();
     }
@@ -19,10 +20,6 @@ export class Bullet {
         this.node.style.height = Bullet.HEIGHT + 'px';
         this.node.classList.add('bullet');
         this.node.style.transform = 'translate(' + this.position.left + 'px, ' + this.position.top + 'px)';
-    }
-
-    public getNode(): HTMLElement {
-        return this.node;
     }
 
     public move(): void {
@@ -39,6 +36,6 @@ export class Bullet {
 
     public destroy(): void {
         this.dead = true;
-        this.node.remove();
+        super.destroy();
     }
 }

@@ -4,15 +4,15 @@ import { Enemy } from './enemy';
 import { Infos } from './infos';
 import { Bullet } from './bullet';
 import { Keys } from './keys';
+import { Node } from "./node";
 
-class Game {
+class Game extends Node {
     private player: Player;
     private board: Board;
     private infos: Infos;
     private enemys: Array<Enemy> = [];
     private bullets: Array<Bullet> = [];
 
-    private node: HTMLElement = document.createElement('div');
     private speed: number = 40;
     private level: number = 1;
     private destroyedCount: number = 0;
@@ -23,6 +23,7 @@ class Game {
     private pause: boolean = false;
 
     constructor() {
+        super('div', 'game');
         this.bootstrap();
         this.start();
     }
@@ -34,7 +35,6 @@ class Game {
 
     private bootstrap(): void {
         document.body.appendChild(this.node);
-        this.node.classList.add('game');
 
         this.board = new Board();
         this.player = new Player();

@@ -1,33 +1,29 @@
 import { Position } from "./position";
 import { Board } from "./board";
 import { Explosion } from "./explosion";
+import { Node } from "./node";
 
-export class Enemy {
+export class Enemy extends Node {
 
-    static WIDTH: number = 54;
-    static HEIGHT: number = 55;
+    public static WIDTH: number = 54;
+    public static HEIGHT: number = 55;
 
-    private node: HTMLElement = document.createElement('div');
-    dead: boolean = false;
-    speed: number = 1;
-    top: number = Enemy.HEIGHT * -1;
-    left: number;
+    private dead: boolean = false;
+    private speed: number = 1;
+    private top: number = Enemy.HEIGHT * -1;
+    private left: number;
 
     constructor(left: number, speed: number = 1) {
+        super('div', 'enemy');
         this.speed = speed;
         this.left = left;
         this.bootstrap();
     }
 
     private bootstrap(): void {
-        this.node.classList.add('enemy');
         this.node.style.transform = 'translate(' + this.left + 'px, ' + this.top + 'px)';
         this.node.style.width = Enemy.WIDTH + 'px';
         this.node.style.height = Enemy.HEIGHT + 'px';
-    }
-
-    public getNode(): HTMLElement {
-        return this.node;
     }
 
     public move(): void {
@@ -51,6 +47,6 @@ export class Enemy {
             let ex = new Explosion(this.getPosition());
             board.addItem(ex.getNode());
         }
-        this.node.remove();
+        super.destroy();
     }
 }
