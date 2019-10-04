@@ -15,4 +15,4 @@ $ npm run watch
 open the index.html file in your browser
 
 ## demo 
-http://htmlpreview.github.io/?https://github.com/lotterfriends/ts-space/blob/master/index.html
+http://tsspace.sourcebucket.de/
