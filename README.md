@@ -1,6 +1,8 @@
 # ts-space
 space shooter with typescript
 
+![demo image](https://i.imgur.com/Qhvayhv.png)
+
 ## requirements 
 - node 8 (nvm use 8)
 
