@@ -82,7 +82,6 @@ class Game extends Node {
     }
 
     private run(): void {
-
         if (!this.gameOver && !this.pause) {
 
             // todo: remove pause time
