@@ -26,6 +26,6 @@
   "license": "MIT",
   "buildTimestamp": 1509450435624,
   "devDependencies": {
-    "webpack-cli": "^3.3.10"
+    "webpack-cli": "^3.3.12"
   }
 }
